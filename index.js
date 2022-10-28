@@ -1,34 +1,24 @@
-const { readFileSync } = require("fs");
-const { createServer } = require("http");
-const { Server } = require("socket.io");
+var express = require("express"); // use express
+var app = express(); // create instance of express
+var server = require("http").Server(app); // create server
+var io = require("socket.io")(server); // create instance of socketio
+var count=0;
 
-const httpServer = createServer((req, res) => {
-  if (req.url !== "/") {
-    res.writeHead(404);
-    res.end("Not found");
-    return;
-  }
-  // reload the file every time
-  const content = readFileSync("index.html");
-  const length = Buffer.byteLength(content);
+app.get( "/",function(req,res){
+  res.sendFile(__dirname+"/index.html");
+})
 
-  res.writeHead(200, {
-    "Content-Type": "text/html",
-    "Content-Length": length,
-  });
-  res.end(content);
-});
-
-const io = new Server(httpServer, {
-  // Socket.IO options
-});
-
-io.on("connection", (socket) => {
-  console.log(`connect ${socket.id}`);
-
-  socket.on("disconnect", (reason) => {
-    console.log(`disconnect ${socket.id} due to ${reason}`);
+io.on("connection", socket => {
+  console.log('a user connetcted');
+  count++;
+  io.emit('usercnt',count);
+  socket.on("disconnect", () => { // when someone closes the tab
+    console.log('a user disconnected');
+    count--;
+    io.emit('usercnt',count);
   });
 });
 
-httpServer.listen(3000);
+server.listen(4000,function(){
+  console.log("listening on 3000");
+}) // run server

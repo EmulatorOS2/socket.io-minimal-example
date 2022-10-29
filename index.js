@@ -9,7 +9,7 @@ app.get( "/",function(req,res){
 })
 
 io.on("connection", socket => {
-  console.log('a user connetcted');
+  console.log('a user connetcted ' + count);
   count++;
   io.emit('usercnt',count);
   socket.on("disconnect", () => { // when someone closes the tab

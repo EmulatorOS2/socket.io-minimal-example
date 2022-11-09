@@ -13,10 +13,14 @@ app.get( "/",function(req,res){
 io.on("connection", socket => {
   console.log('a user connetcted ' + count);
   count++;
+
+count++;
+
   io.emit('usercnt',count);
   socket.on("disconnect", () => { // when someone closes the tab
     console.log('a user disconnected');
     count--;
+count--;
     io.emit('usercnt',count);
   });
 });

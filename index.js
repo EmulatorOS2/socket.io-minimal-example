@@ -9,12 +9,15 @@ function randomIntFromInterval(min, max) { // min and max included
 }
 function add(){
    var i = randomIntFromInterval(1,2);
-  console.log('add' + i)
+   console.log('add' + i)
  for (var i = 1; i < 8; i++) count++;
+}
+if (count < 0) {
+  count = 1532
 }
 function less(){
    var i = randomIntFromInterval(1,2);
-  console.log('add' + less)
+  console.log('less' + i)
  for (var i = 1; i < 8; i++) count--;
 }
 

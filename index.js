@@ -4,16 +4,17 @@ var server = require("http").Server(app); // create server
 var io = require("socket.io")(server); // create instance of socketio
 const port = process.env.PORT || 4000
 var count=0;
-
-function getRandomInt(max) {
-  return Math.floor(Math.random() * max);
+function randomIntFromInterval(min, max) { // min and max included 
+  return Math.floor(Math.random() * (max - min + 1) + min)
 }
 function add(){
-   var i = getRandomInt(2);
+   var i = randomIntFromInterval(1,2);
+  console.log('add' + i)
  for (var i = 1; i < 8; i++) count++;
 }
 function less(){
-   var i = getRandomInt(2);
+   var i = randomIntFromInterval(1,2);
+  console.log('add' + less)
  for (var i = 1; i < 8; i++) count--;
 }
 

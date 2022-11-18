@@ -8,17 +8,21 @@ function randomIntFromInterval(min, max) { // min and max included
   return Math.floor(Math.random() * (max - min + 1) + min)
 }
 function add(){
-   var i = randomIntFromInterval(1,2);
-   console.log('add' + i + 'now' + count)
- for (var i = 1; i < 8; i++) count++;
+   var times = randomIntFromInterval(1,2);
+   console.log('add' + times + 'now' + count)
+ for (var number = 1; number <= times; number++) {
+       count++;
+    }
 }
 if (count < 0) {
   count = 1532
 }
 function less(){
-   var i = randomIntFromInterval(1,2);
-  console.log('less' + i + 'now' + count)
- for (var i = 1; i < 8; i++) count--;
+   var times = randomIntFromInterval(1,2);
+  console.log('add' + times + 'now' + count)
+ for (var number = 1; number <= times; number++) {
+       count--;
+    }
 }
 
 app.get( "/",function(req,res){

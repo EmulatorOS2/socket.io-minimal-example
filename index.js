@@ -5,22 +5,32 @@ var io = require("socket.io")(server); // create instance of socketio
 const port = process.env.PORT || 4000
 var count=0;
 
-
+function getRandomInt(max) {
+  return Math.floor(Math.random() * max);
+}
+function add(){
+   var i = getRandomInt(2);
+ for (var i = 1; i < 8; i++) count++;
+}
+function less(){
+   var i = getRandomInt(2);
+ for (var i = 1; i < 8; i++) count--;
+}
+function addfunc(){
+  count++,
+}
 app.get( "/",function(req,res){
   res.sendFile(__dirname+"/index.html");
 })
 
 io.on("connection", socket => {
   console.log('a user connetcted ' + count);
-  count++;
-
-count++;
-
+  add();
   io.emit('usercnt',count);
+  
   socket.on("disconnect", () => { // when someone closes the tab
     console.log('a user disconnected');
-    count--;
-count--;
+    less();
     io.emit('usercnt',count);
   });
 });

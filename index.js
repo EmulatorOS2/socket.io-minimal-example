@@ -9,7 +9,7 @@ function randomIntFromInterval(min, max) { // min and max included
 }
 function add(){
    var i = randomIntFromInterval(1,2);
-   console.log('add' + i)
+   console.log('add' + i + 'now' + count)
  for (var i = 1; i < 8; i++) count++;
 }
 if (count < 0) {
@@ -17,7 +17,7 @@ if (count < 0) {
 }
 function less(){
    var i = randomIntFromInterval(1,2);
-  console.log('less' + i)
+  console.log('less' + i + 'now' + count)
  for (var i = 1; i < 8; i++) count--;
 }
 
@@ -26,12 +26,10 @@ app.get( "/",function(req,res){
 })
 
 io.on("connection", socket => {
-  console.log('a user connetcted ' + count);
   add();
   io.emit('usercnt',count);
   
   socket.on("disconnect", () => { // when someone closes the tab
-    console.log('a user disconnected');
     less();
     io.emit('usercnt',count);
   });

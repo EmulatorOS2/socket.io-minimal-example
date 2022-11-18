@@ -16,9 +16,7 @@ function less(){
    var i = getRandomInt(2);
  for (var i = 1; i < 8; i++) count--;
 }
-function addfunc(){
-  count++,
-}
+
 app.get( "/",function(req,res){
   res.sendFile(__dirname+"/index.html");
 })
